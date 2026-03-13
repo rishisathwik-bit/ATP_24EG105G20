@@ -1,0 +1,44 @@
+###read all users
+GET http://localhost:4000/user-api/users
+
+###read user by id
+GET http://localhost:4000/user-api/user
+
+###create new user
+POST http://localhost:4000/user-api/users
+Content-Type: application/json
+
+{
+    "username":"Bhanu",
+    "password":"Bhanu12",
+    "email":"Bhanu@email.com"  
+
+}
+###updating 
+
+PUT http://localhost:4000/user-api/users/69abd97b0ea40bae12771f67
+Content-Type: application/json
+
+{
+    "username":"Ravi",
+    "password":"Ravi1423",
+    "email":"ravi@gmail.com"
+
+}
+
+###user login
+POST http://localhost:4000/user-api/auth
+Content-Type: application/json
+
+{
+      "email":"ravi@gmail.com",
+      "password":"Ravi1423"
+}
+
+
+###
+
+DELETE http://localhost:4000/user-api/users/69aaa44e79766269a1364fa9
+
+### Add product to cart
+PUT http://localhost:4000/user-api/cart/product-id/69b251d701f761f0a35184b3
