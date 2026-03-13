@@ -1,0 +1,32 @@
+###read all users
+GET http://localhost:4100/product-api/products
+
+
+###Read products by id
+GET http://localhost:4100/product-api/products/69aafc8fc7a0ccdb19fa93fc
+
+###create new user
+POST http://localhost:4100/product-api/products
+Content-Type: application/json
+
+{    
+     "productId":1111,
+     "productName":"moblie",
+     "price":30000,
+    "brand":"vivo"    
+
+}
+###updating 
+
+PUT http://localhost:4100/product-api/products/69b251d701f761f0a35184b3
+Content-Type: application/json
+
+{
+    "productId":5555,
+     "productName":"Washing Machine",
+     "price":40000,
+    "brand":"LG" 
+}
+###
+
+DELETE http://localhost:4100/product-api/products/69aafc8fc7a0ccdb19fa93fc
