@@ -1,0 +1,25 @@
+.container {
+    width: 600px;
+    margin: 20px auto;
+    border: 3px solid black;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+ }
+
+ th, td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+ }
+.title {
+  font-weight: bold;
+  font-size: 20px;
+  background: #eee;
+}
+
+.inner-table {
+  width: 100%;
+  border-collapse: collapse;
+ }
