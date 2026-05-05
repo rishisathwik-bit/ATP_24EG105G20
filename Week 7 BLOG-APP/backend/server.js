@@ -13,7 +13,7 @@ config();
 const app = exp();
 //enable cors
 app.use(cors({
-origin: "https://your-frontend.vercel.app"
+origin: "https://your-vercel-url.vercel.app"
   credentials:true
 }))
 //add cookie parser middeleware
