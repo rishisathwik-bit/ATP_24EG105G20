@@ -2,13 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import RootLayout from "./components/RootLayout";
 import Home from "./components/Home";
 import Register from "./components/Register";
+import ArticleByID from "./components/ArticleByID.jsx";
 import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import AuthorProfile from "./components/AuthorProfile";
 import AuthorArticles from "./components/AuthorArticles";
 import EditArticle from './components/EditArticle'
 import WriteArticles from "./components/WriteArticles";
-import ArticleByID from "./components/ArticleByID.jsx";
 import AdminProfile from './components/AdminProfile'
 import Unauthorized from "./components/Unauthorized";
 
