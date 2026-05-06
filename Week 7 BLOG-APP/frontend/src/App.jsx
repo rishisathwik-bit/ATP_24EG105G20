@@ -8,7 +8,7 @@ import AuthorProfile from "./components/AuthorProfile";
 import AuthorArticles from "./components/AuthorArticles";
 import EditArticle from './components/EditArticle'
 import WriteArticles from "./components/WriteArticles";
-import ArticleByID from "./components/ArticleByID";
+import ArticleByID from "./components/ArticleByID.jsx";
 import AdminProfile from './components/AdminProfile'
 import Unauthorized from "./components/Unauthorized";
 
