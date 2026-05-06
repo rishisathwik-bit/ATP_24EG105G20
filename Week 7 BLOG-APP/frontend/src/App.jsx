@@ -6,11 +6,13 @@ import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import AuthorProfile from "./components/AuthorProfile";
 import AuthorArticles from "./components/AuthorArticles";
-import EditArticle from "./components/EditArticle";
+import EditArticle from './components/EditArticle'
 import WriteArticles from "./components/WriteArticles";
 import ArticleByID from "./components/ArticleByID";
-import { Toaster } from "react-hot-toast";
+import AdminProfile from './components/AdminProfile'
 import Unauthorized from "./components/Unauthorized";
+
+import {Toaster} from 'react-hot-toast'
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -33,19 +35,15 @@ function App() {
         },
         {
           path: "user-profile",
-          element: (
-            <ProtectedRoute allowedRoles={["USER"]}>
-              <UserProfile />
-            </ProtectedRoute>
-          ),
+          element: <ProtectedRoute allowedRoles={["USER"]}>
+            <UserProfile />
+          </ProtectedRoute>,
         },
         {
           path: "author-profile",
-          element: (
-            <ProtectedRoute allowedRoles={["AUTHOR"]}>
-              <AuthorProfile />
-            </ProtectedRoute>
-          ),
+          element:<ProtectedRoute allowedRoles={["AUTHOR"]}>
+            <AuthorProfile />
+          </ProtectedRoute>,
 
           children: [
             {
@@ -71,19 +69,21 @@ function App() {
           element: <EditArticle />,
         },
         {
-          path: "unauthorized",
-          element: <Unauthorized />,
+          path:"admin-profile",
+          element: <ProtectedRoute allowedRoles={["ADMIN"]}><AdminProfile/></ProtectedRoute>,
         },
+        {
+          path:"unauthorized",
+          element:<Unauthorized/>,
+        }
       ],
     },
   ]);
 
-  return (
-    <div>
-      <Toaster position="top-center" reverseOrder={false} />
-      <RouterProvider router={routerObj} />
-    </div>
-  );
+  return ( <div> 
+    <Toaster position="top-center" reverseOrder={false}/>
+    <RouterProvider router={routerObj} />
+  </div>)
 }
 
 export default App;
