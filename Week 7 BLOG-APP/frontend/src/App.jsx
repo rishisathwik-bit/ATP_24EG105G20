@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import RootLayout from "./components/RootLayout";
 import Home from "./components/Home";
 import Register from "./components/Register";
-import ArticleByID from "./components/ArticleByID.jsx";
+import ArticleByID from "./components/ArticleByID";
 import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import AuthorProfile from "./components/AuthorProfile";
