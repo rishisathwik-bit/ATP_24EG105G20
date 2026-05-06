@@ -28,7 +28,7 @@ import {
 } from "../styles/common.js";
 import { useForm } from "react-hook-form";
 
-function ArticleByID() {
+export function ArticleByID() {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -207,7 +207,7 @@ function ArticleByID() {
   );
 }
 
-export default ArticleByID;
+
 
 // {
 //   "user":"6989799b7013502767d3f82b",
