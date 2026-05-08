@@ -160,7 +160,11 @@ const Navigate = useNavigate();
           <div className={formGroup}>
             <label className={labelClass}>Profile Image</label>
 
-            <input type="text" accept="image/png, image/jpeg" {...register("profileImageUrl")} />
+            <input
+  type="file"
+  accept="image/png, image/jpeg"
+  {...register("profileImageUrl")}
+/>
 
             {errors.profileImageUrl && <p className={errorClass}>{errors.profileImageUrl.message}</p>}
           </div>
