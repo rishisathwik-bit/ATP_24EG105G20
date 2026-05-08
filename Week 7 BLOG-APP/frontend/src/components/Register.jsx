@@ -30,7 +30,7 @@ function Register() {
         //start loading
         setLoading(true);
         //make HTTP POST req to create User in Backend
-        let res=axios.post("https://atp-24eg105g20-2.onrender.com/auth/users",userObj)
+        let res=axios.post(""https://atp-24eg105g20-2.onrender.com/auth/users",userObj)
         if(res.status==201)
         // Navigate to Login
        Navigate("/login");
