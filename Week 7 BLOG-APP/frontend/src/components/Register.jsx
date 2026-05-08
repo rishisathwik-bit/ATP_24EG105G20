@@ -10,8 +10,8 @@ import {
   submitBtn,
   mutedText,
 } from "../styles/common";
+import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router";
 import { useState } from "react";
 import axios from 'axios';
 function Register() {
@@ -22,7 +22,7 @@ function Register() {
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
-
+const Navigate = useNavigate();
   //When user registration submitted
   const onUserRegister = async (userObj) => {
     console.log(userObj);
@@ -48,7 +48,7 @@ function Register() {
         <h2 className={formTitle}>Create an Account</h2>
 
         {/* API Error */}
-        {/* {apiError && <p className={errorClass}>{apiError}</p>} */}
+         {apiError && <p className={errorClass}>{apiError}</p>} 
 
         <form onSubmit={handleSubmit(onUserRegister)}>
           {/* ROLE */}
