@@ -1,7 +1,7 @@
 import { useParams, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "../stores/authStore";
+import { useAuth } from "../store/authStore";
 import { useForm } from "react-hook-form";
 
 import {
