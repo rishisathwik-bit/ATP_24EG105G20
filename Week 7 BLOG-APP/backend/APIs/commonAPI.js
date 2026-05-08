@@ -14,7 +14,7 @@ import cloudinary from '../config/cloudinary.js'
 const {sign}=jwt
 
 // Route to register
-commonApp.post('/users', upload.single("profileImageUrl"), async (req, res, next) => {
+commonApp.post('https://atp-24eg105g20-2.onrender.com/auth/users', upload.single("profileImageUrl"), async (req, res, next) => {
     let cloudinaryResult;
 
     try {
@@ -64,7 +64,7 @@ commonApp.post('/users', upload.single("profileImageUrl"), async (req, res, next
 })
 
 // route for login
-commonApp.post('/login', async (req, res) => {
+commonApp.post('https://atp-24eg105g20-2.onrender.com/auth/login', async (req, res) => {
     // get email and password from the req
     const { email, password } = req.body;
 
