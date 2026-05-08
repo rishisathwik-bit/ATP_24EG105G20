@@ -41,12 +41,7 @@ commonApp.post('/users', upload.single("profileImageUrl"), async (req, res, next
 } else {
     newUser.profileImageUrl = "";
 }
-
-        // add CDN link of image to new userObj
-        newUser.profileImageUrl = cloudinaryResult?.secure_url;
-
-        // RUN VALIDATORS MANUALLY
-
+    
         // replace the password eith hashed password
         newUser.password = await hash(newUser.password, 12)
 
