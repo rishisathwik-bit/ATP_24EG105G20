@@ -13,8 +13,8 @@ config();
 const app = exp();
 //enable cors
 app.use(cors({
-origin:"https://your-app.vercel.app"
-  credentials:true
+ origin: "https://atp-24-eg-105-g20-cyqe1yl94-rishisathwik-bits-projects.vercel.app",
+  credentials: true
 }))
 //add cookie parser middeleware
 app.use(cookieParser())
