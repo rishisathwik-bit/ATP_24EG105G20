@@ -23,9 +23,10 @@ const userSchema = new Schema(
       enum: ["USER", "AUTHOR", "ADMIN"],
       required: [true, "Invalid role"],
     },
-    profileImageUrl: {
-      type: String,
-    },
+  profileImageUrl: {
+  type: String,
+  default: ""
+},
     isUserActive:{
         type:Boolean,
         default:true
