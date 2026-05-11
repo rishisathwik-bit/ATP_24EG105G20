@@ -12,12 +12,10 @@ config();
 //create express app
 const app = exp();
 //enable cors
-import cors from "cors";
-
 app.use(cors({
   origin: "https://atp-24-eg-105-g20-cyqe1yl94-rishisathwik-bits-projects.vercel.app",
   credentials: true
-}))      
+}))
 //add cookie parser middeleware
 app.use(cookieParser())
 //body parser middleware
@@ -35,7 +33,7 @@ const connectDB = async () => {
     console.log("DB server connected");
     //assign port
     const port = process.env.PORT || 4000;
-    app.listen(port, () => console.log(`server listening on ${port}..`));
+    app.listen(port, () => console.log(server listening on ${port}..));
   } catch (err) {
     console.log("err in db connect", err);
   }
@@ -46,7 +44,7 @@ connectDB();
 //to handle invalid path
 app.use((req, res, next) => {
   console.log(req.url);
-  res.status(404).json({ message: `path ${req.url} is invalid` });
+  res.status(404).json({ message: path ${req.url} is invalid });
 });
 app.get("/", (req, res) => {
   res.send("Backend is live ");
@@ -72,7 +70,7 @@ app.use((err, req, res, next) => {
     const value = keyValue[field];
     return res.status(409).json({
       message: "error occurred",
-      error: `${field} "${value}" already exists`,
+      error: ${field} "${value}" already exists,
     });
   }
 
