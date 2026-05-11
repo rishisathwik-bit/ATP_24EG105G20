@@ -60,7 +60,7 @@ export const useAuth = create((set) => ({
   checkAuth: async () => {
     try {
       set({ loading: true });
-      const res = await axios.get("https://atp-24eg105g20-2.onrender.com/auth/users", { withCredentials: true });
+      const res = await axios.get("https://atp-24eg105g20-2.onrender.com/auth/check-auth", { withCredentials: true });
 
       set({
         currentUser: res.data.payload,
