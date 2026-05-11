@@ -14,15 +14,10 @@ const app = exp();
 //enable cors
 import cors from "cors";
 
-app.use(
-  cors({
-    origin: [
-      "https://atp-24-eg-105-g20.vercel.app",
-      "http://localhost:5173"
-    ],
-    credentials: true,
-  })
-);      
+app.use(cors({
+  origin: "https://atp-24-eg-105-g20-cyqe1yl94-rishisathwik-bits-projects.vercel.app",
+  credentials: true
+}))      
 //add cookie parser middeleware
 app.use(cookieParser())
 //body parser middleware
