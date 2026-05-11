@@ -17,6 +17,8 @@ const app = exp();
 app.use(
   cors({
     origin: "https://atp-24-eg-105-g20.vercel.app",
+    "atp-24-eg-105-g20-git-main-rishisathwik-bits-projects.vercel.app",
+     "atp-24-eg-105-g20-hgtz9hnue-rishisathwik-bits-projects.vercel.app",
     credentials: true,
   })
 );
