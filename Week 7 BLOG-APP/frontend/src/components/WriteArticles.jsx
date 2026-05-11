@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import axios from "axios";
 import {toast} from 'react-hot-toast'
 import { useNavigate } from "react-router";
-
+import axios from "axios";
+axios.defaults.withCredentials = true;
 import {
   formCard,
   formTitle,
