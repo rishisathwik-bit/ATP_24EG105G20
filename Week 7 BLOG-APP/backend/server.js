@@ -16,7 +16,7 @@ const app = exp();
 // enable cors
 app.use(
   cors({
-    origin:https://atp-24-eg-105-g20.vercel.app,
+    origin: "https://atp-24-eg-105-g20.vercel.app",
     credentials: true,
   })
 );
