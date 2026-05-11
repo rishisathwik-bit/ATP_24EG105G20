@@ -19,6 +19,7 @@ origin: [
     ],
     credentials: true
   })
+)        
 //add cookie parser middeleware
 app.use(cookieParser())
 //body parser middleware
