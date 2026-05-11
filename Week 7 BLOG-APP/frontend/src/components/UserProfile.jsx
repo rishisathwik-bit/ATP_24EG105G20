@@ -2,6 +2,7 @@ import { useAuth } from "../store/authStore";
 import { useNavigate } from "react-router";
 
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import { useEffect, useState } from "react";
 
 import {
