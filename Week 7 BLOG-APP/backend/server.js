@@ -6,34 +6,61 @@ import { authorApp } from "./APIs/AuthorAPI.js";
 import { adminApp } from "./APIs/AdminAPI.js";
 import { commonApp } from "./APIs/commonAPI.js";
 import cookieParser from "cookie-parser";
-import cors from 'cors'
+import cors from "cors";
+
 config();
 
-//create express app
+// create express app
 const app = exp();
-//enable cors
-app.use(cors({
-  origin: "https://atp-24-eg-105-g20-cyqe1yl94-rishisathwik-bits-projects.vercel.app",
-  credentials: true
-}))
-//add cookie parser middeleware
-app.use(cookieParser())
-//body parser middleware
+
+// enable cors
+app.use(
+  cors({
+    origin: [
+      "https://atp-24-eg-105-g20.vercel.app",
+      "https://atp-24-eg-105-g20-cyqe1yl94-rishisathwik-bits-projects.vercel.app"
+    ],
+    credentials: true,
+  })
+);
+
+// cookie parser middleware
+app.use(cookieParser());
+
+// body parser middleware
 app.use(exp.json());
-//path level middlewares
+
+// routes
 app.use("/user-api", userApp);
 app.use("/author-api", authorApp);
 app.use("/admin-api", adminApp);
 app.use("/auth", commonApp);
 
-//connect to db
+// root route
+app.get("/", (req, res) => {
+  res.send("Backend is live");
+});
+
+// invalid path handler
+app.use((req, res) => {
+  console.log(req.url);
+  res.status(404).json({
+    message: `path ${req.url} is invalid`,
+  });
+});
+
+// DB connection
 const connectDB = async () => {
   try {
     await connect(process.env.DB_URL);
+
     console.log("DB server connected");
-    //assign port
+
     const port = process.env.PORT || 4000;
-    app.listen(port, () => console.log(server listening on ${port}..));
+
+    app.listen(port, () => {
+      console.log(`server listening on ${port}..`);
+    });
   } catch (err) {
     console.log("err in db connect", err);
   }
@@ -41,39 +68,48 @@ const connectDB = async () => {
 
 connectDB();
 
-//to handle invalid path
-app.use((req, res, next) => {
-  console.log(req.url);
-  res.status(404).json({ message: path ${req.url} is invalid });
-});
-app.get("/", (req, res) => {
-  res.send("Backend is live ");
-});
-
-//Error handling middleware
+// error handling middleware
 app.use((err, req, res, next) => {
-  console.log("error is ",err)
+  console.log("error is ", err);
   console.log("Full error:", JSON.stringify(err, null, 2));
-  //ValidationError
-  if (err.name === "ValidationError") {
-    return res.status(400).json({ message: "error occurred", error: err.message });
-  }
-  //CastError
-  if (err.name === "CastError") {
-    return res.status(400).json({ message: "error occurred", error: err.message });
-  }
-  const errCode = err.code ?? err.cause?.code ?? err.errorResponse?.code;
-  const keyValue = err.keyValue ?? err.cause?.keyValue ?? err.errorResponse?.keyValue;
 
-  if (errCode === 11000) {
-    const field = Object.keys(keyValue)[0];
-    const value = keyValue[field];
-    return res.status(409).json({
+  // ValidationError
+  if (err.name === "ValidationError") {
+    return res.status(400).json({
       message: "error occurred",
-      error: ${field} "${value}" already exists,
+      error: err.message,
     });
   }
 
-  //send server side error
-  res.status(500).json({ message: "error occurred", error: "Server side error" });
+  // CastError
+  if (err.name === "CastError") {
+    return res.status(400).json({
+      message: "error occurred",
+      error: err.message,
+    });
+  }
+
+  const errCode = err.code ?? err.cause?.code ?? err.errorResponse?.code;
+
+  const keyValue =
+    err.keyValue ??
+    err.cause?.keyValue ??
+    err.errorResponse?.keyValue;
+
+  // duplicate key error
+  if (errCode === 11000) {
+    const field = Object.keys(keyValue)[0];
+    const value = keyValue[field];
+
+    return res.status(409).json({
+      message: "error occurred",
+      error: `${field} "${value}" already exists`,
+    });
+  }
+
+  // server error
+  res.status(500).json({
+    message: "error occurred",
+    error: "Server side error",
+  });
 });
