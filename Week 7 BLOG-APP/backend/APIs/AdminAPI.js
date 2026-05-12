@@ -3,10 +3,9 @@ import exp from 'express'
 import {verifyToken} from '../middlewares/verifyToken.js'
 import {ArticleModel} from '../models/ArticleModel.js'
 import {UserModel} from '../models/UserModel.js'
-export const adminApp = exp.Router()
 
 // ROUTE TO READ ALL users
-
+export const adminApp = exp.Router()
 adminApp.get('/users',verifyToken("ADMIN"),async(req,res)=>{
     const usersList = await UserModel.find({});
     if(!usersList){
