@@ -37,7 +37,7 @@ export const useAuth = create((set) => ({
     try {
       //set loading state
       //make logout api req
-      let res = await axios.get("https://atp-24eg105g20-2.onrender.com/auth/login", { withCredentials: true });
+      let res = await axios.get("https://atp-24eg105g20-2.onrender.com/auth/logout", { withCredentials: true });
       //update state
       if (res.status === 200) {
         set({
