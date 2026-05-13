@@ -83,7 +83,7 @@ function ArticleByID() {
 
     try {
       const res = await axios.patch(
-        `https://atp-24eg112c38-2.onrender.com/author-api/articles`,
+        `https://atp-24eg105g20-2.onrender.com/author-api/articles`,
         {
           articleId: article._id,
           isArticleActive: newStatus,
@@ -112,7 +112,7 @@ function ArticleByID() {
     commentObj.articleId = article._id;
 
     let res = await axios.put(
-      "https://atp-24eg112c38-2.onrender.com/user-api/articles",
+      "https://atp-24eg105g20-2.onrender.com/user-api/articles",
       commentObj,
       { withCredentials: true }
     );
