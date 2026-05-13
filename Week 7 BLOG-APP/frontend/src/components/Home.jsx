@@ -35,7 +35,6 @@ function Home() {
 
 
         <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/10 hover:scale-105 transition duration-300 shadow-xl">
-          <div className="text-5xl mb-4">🚀</div>
           <h2 className="text-2xl font-bold mb-3">Publish Instantly</h2>
           <p className="text-gray-300">
             Share your content with readers across the globe in seconds.
@@ -43,7 +42,6 @@ function Home() {
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/10 hover:scale-105 transition duration-300 shadow-xl">
-          <div className="text-5xl mb-4">💡</div>
           <h2 className="text-2xl font-bold mb-3">Discover Ideas</h2>
           <p className="text-gray-300">
             Explore creative articles, trending topics, and inspiring stories.
