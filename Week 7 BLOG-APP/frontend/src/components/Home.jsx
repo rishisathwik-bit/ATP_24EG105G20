@@ -2,38 +2,68 @@ import React from "react";
 
 function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-slate-900 to-black text-white">
       
-      <div className="text-center max-w-2xl">
-        
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-          Welcome to MyBlog
+      {/* Navbar */}
+      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10 backdrop-blur-md">
+        <h1 className="text-3xl font-extrabold tracking-wide">
+          Blog<span className="text-indigo-400">App</span>
         </h1>
 
-        <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
-          A modern blogging platform where users can read articles, share thoughts,
-          and engage through comments. Authors can publish and manage articles,
-          while admins manage users and platform access.
+      {/* Hero Section */}
+      <section className="flex flex-col items-center justify-center text-center px-6 py-28">
+        <h1 className="text-6xl md:text-7xl font-black leading-tight max-w-4xl">
+          Share Your Ideas With The World 🌍
+        </h1>
+
+        <p className="mt-6 text-gray-300 text-lg md:text-xl max-w-2xl">
+          Create, publish, and explore amazing articles from talented writers.
+          Your next favorite story starts here.
         </p>
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
-            Explore Articles
+        <div className="mt-10 flex gap-5">
+          <button className="bg-indigo-500 hover:bg-indigo-600 px-7 py-3 rounded-xl text-lg font-semibold shadow-lg transition duration-300">
+            Get Started
           </button>
 
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
-            Learn More
+          <button className="border border-white/20 hover:border-indigo-400 hover:text-indigo-400 px-7 py-3 rounded-xl text-lg font-semibold transition duration-300">
+            Explore Blogs
           </button>
+        </div>
+      </section>
 
+      {/* Features */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 px-8 pb-20">
+        
+        <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/10 hover:scale-105 transition duration-300 shadow-xl">
+          <div className="text-5xl mb-4">✍️</div>
+          <h2 className="text-2xl font-bold mb-3">Write Articles</h2>
+          <p className="text-gray-300">
+            Express your thoughts with a modern and clean writing experience.
+          </p>
         </div>
 
-        <p className="mt-8 text-xs sm:text-sm text-gray-400">
-          Built with React, Node.js, Express & MongoDB
-        </p>
+        <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/10 hover:scale-105 transition duration-300 shadow-xl">
+          <div className="text-5xl mb-4">🚀</div>
+          <h2 className="text-2xl font-bold mb-3">Publish Instantly</h2>
+          <p className="text-gray-300">
+            Share your content with readers across the globe in seconds.
+          </p>
+        </div>
 
-      </div>
+        <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/10 hover:scale-105 transition duration-300 shadow-xl">
+          <div className="text-5xl mb-4">💡</div>
+          <h2 className="text-2xl font-bold mb-3">Discover Ideas</h2>
+          <p className="text-gray-300">
+            Explore creative articles, trending topics, and inspiring stories.
+          </p>
+        </div>
+      </section>
 
+      {/* Footer */}
+      <footer className="text-center py-6 border-t border-white/10 text-gray-400">
+        © 2026 BlogApp. All rights reserved.
+      </footer>
     </div>
   );
 }
