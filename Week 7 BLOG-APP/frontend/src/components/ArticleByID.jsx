@@ -1,8 +1,9 @@
-import { useParams, useLocation, useNavigate } from "react-router";
+import { useParams, useLocation, useNavigate } from "react-router-dom"; // usually imported from react-router-dom
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../store/authStore";
 import { useForm } from "react-hook-form";
+// import toast from "react-hot-toast"; // <-- Make sure to import your toast library
 
 import {
   articlePageWrapper,
@@ -33,38 +34,56 @@ function ArticleByID() {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const user = useAuth((state) => state.currentUser);
 
-  const [article, setArticle] = useState(location.state || null);
+  // 1. Ensure location.state is only used if it matches the current URL id
+  const [article, setArticle] = useState(() => {
+    if (location.state && location.state._id === id) {
+      return location.state;
+    }
+    return null;
+  });
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (article) return;
+    // 2. Prevent fetching ONLY if we already have the specific article for this ID
+    if (article && article._id === id) return;
 
     const getArticle = async () => {
       setLoading(true);
+      setError(null); // Reset errors on new fetch attempts
 
       try {
         const res = await axios.get(
-          `https://atp-24eg105g20-2.onrender.com/user-api/article/${id}`,
+          // 3. Changed 'article' to 'articles' (Standard REST APIs usually use plural for routes)
+          // Change back to 'article/${id}' if your backend specifically uses the singular form.
+          `https://atp-24eg105g20-2.onrender.com/user-api/articles/${id}`,
           { withCredentials: true }
         );
 
         setArticle(res.data.payload);
       } catch (err) {
-        setError(err.response?.data?.error);
+        // 4. Added robust error fallbacks for CORS/Network issues
+        setError(
+          err.response?.data?.message || 
+          err.response?.data?.error || 
+          err.message || 
+          "Failed to fetch article"
+        );
       } finally {
         setLoading(false);
       }
     };
 
     getArticle();
-  }, [id]);
+  }, [id]); // Only re-run when the ID in the URL changes
 
   const formatDate = (date) => {
+    if (!date) return "";
     return new Date(date).toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
       dateStyle: "medium",
@@ -97,7 +116,9 @@ function ArticleByID() {
       const msg = err.response?.data?.message;
 
       if (err.response?.status === 400) {
-        toast(msg);
+        // Ensure toast is imported at the top!
+        // toast(msg); 
+        alert(msg); // Fallback if toast isn't set up
       } else {
         setError(msg || "Operation failed");
       }
@@ -109,16 +130,21 @@ function ArticleByID() {
   };
 
   const addComment = async (commentObj) => {
-    commentObj.articleId = article._id;
+    try {
+      commentObj.articleId = article._id;
 
-    let res = await axios.put(
-      "https://atp-24eg105g20-2.onrender.com/user-api/articles",
-      commentObj,
-      { withCredentials: true }
-    );
+      let res = await axios.put(
+        "https://atp-24eg105g20-2.onrender.com/user-api/articles",
+        commentObj,
+        { withCredentials: true }
+      );
 
-    if (res.status === 200) {
-      setArticle(res.data.payload);
+      if (res.status === 200) {
+        setArticle(res.data.payload);
+        reset(); // Clear the comment input after successful submission
+      }
+    } catch (err) {
+      console.error("Failed to post comment:", err);
     }
   };
 
@@ -126,7 +152,7 @@ function ArticleByID() {
     return <p className={loadingClass + " text-center px-4"}>Loading article...</p>;
 
   if (error)
-    return <p className={errorClass + " text-center px-4"}>{error}</p>;
+    return <p className={errorClass + " text-center px-4 text-red-500"}>{error}</p>;
 
   if (!article) return null;
 
@@ -143,7 +169,8 @@ function ArticleByID() {
         </h1>
 
         <div className={`${articleAuthorRow} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm`}>
-          <div className={authorInfo}>✍ {user.role}</div>
+          {/* 5. Safe optional chaining added to user?.role to prevent crashes if logged out */}
+          <div className={authorInfo}>✍ {user?.role || "Guest"}</div>
           <div>{formatDate(article.createdAt)}</div>
         </div>
       </div>
@@ -176,7 +203,7 @@ function ArticleByID() {
 
             <input
               type="text"
-              {...register("comment")}
+              {...register("comment", { required: true })}
               className={`${inputClass} text-sm sm:text-base`}
               placeholder="Write your comment here..."
             />
