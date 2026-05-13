@@ -13,7 +13,7 @@ function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center text-center px-6 py-28">
         <h1 className="text-6xl md:text-7xl font-black leading-tight max-w-4xl">
-          Share Your Ideas With The World 🌍
+          Share Your Ideas With The World 
         </h1>
 
         <p className="mt-6 text-gray-300 text-lg md:text-xl max-w-2xl">
@@ -32,16 +32,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 px-8 pb-20">
-        
-        <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/10 hover:scale-105 transition duration-300 shadow-xl">
-          <div className="text-5xl mb-4">✍️</div>
-          <h2 className="text-2xl font-bold mb-3">Write Articles</h2>
-          <p className="text-gray-300">
-            Express your thoughts with a modern and clean writing experience.
-          </p>
-        </div>
+
 
         <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/10 hover:scale-105 transition duration-300 shadow-xl">
           <div className="text-5xl mb-4">🚀</div>
