@@ -49,8 +49,8 @@ function AuthorArticles() {
     getAuthorArticles();
   }, [user]);
 
-  const openArticle = (articles) => {
-    navigate(`/articles/${article._id}`, {
+  const openArticle = (article) => {
+    navigate(`/article/${article._id}`, {
       state: article,
     });
   };
@@ -71,7 +71,7 @@ function AuthorArticles() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {articles.map((articles) => (
+      {articles.map((article) => (
         <div key={article._id} className={`${articleCardClass} relative flex flex-col`}>
           {/* Status Badge */}
           <span className={article.isArticleActive ? articleStatusActive : articleStatusDeleted}>
