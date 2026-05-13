@@ -32,14 +32,7 @@ function Home() {
           </div>
         </div>
 
-        {/* Right Image */}
-        <div className="flex-1 flex justify-center">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-            alt="blog"
-            className="w-72 md:w-96"
-          />
-        </div>
+
       </div>
     </div>
   );
