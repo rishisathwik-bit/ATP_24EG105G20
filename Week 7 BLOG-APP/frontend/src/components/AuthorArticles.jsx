@@ -33,7 +33,7 @@ function AuthorArticles() {
       try {
         setLoading(true);
         //read articles of current author
-        let res = await axios.get("https://atp-24eg105g20-2.onrender.com/author-api/article", { withCredentials: true } );
+        let res = await axios.get("https://atp-24eg105g20-2.onrender.com/author-api/articles", { withCredentials: true } );
         if (res.status === 200) {
           setArticles(res.data?.payload);
         }
@@ -50,7 +50,7 @@ function AuthorArticles() {
   }, [user]);
 
   const openArticle = (article) => {
-    navigate(`/article/${article._id}`, {
+    navigate(`/articles/${article._id}`, {
       state: article,
     });
   };
