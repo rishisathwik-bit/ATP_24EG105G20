@@ -43,15 +43,20 @@ function ArticleByID() {
 
   useEffect(() => {
     if (article) return;
-
     const getArticle = async () => {
       setLoading(true);
 
       try {
-        const res = await axios.get(
-          `https://atp-24eg105g20-2.onrender.com/user-api/article/${id}`,
-          { withCredentials: true }
-        );
+       const token = sessionStorage.getItem("token");
+
+const res = await axios.get(
+  `https://atp-24eg105g20-2.onrender.com/user-api/article/${id}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
         setArticle(res.data.payload);
       } catch (err) {
@@ -82,14 +87,20 @@ function ArticleByID() {
     if (!window.confirm(confirmMsg)) return;
 
     try {
-      const res = await axios.patch(
-        `https://atp-24eg105g20-2.onrender.com/author-api/articles`,
-        {
-          articleId: article._id,
-          isArticleActive: newStatus,
-        },
-        { withCredentials: true }
-      );
+      const token = sessionStorage.getItem("token");
+
+const res = await axios.patch(
+  `https://atp-24eg105g20-2.onrender.com/author-api/articles`,
+  {
+    articleId: article._id,
+    isArticleActive: newStatus,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
       setArticle(res.data.payload);
       navigate("/author-profile");
@@ -108,14 +119,17 @@ function ArticleByID() {
     navigate("/edit-article", { state: articleObj });
   };
 
-  const addComment = async (commentObj) => {
-    commentObj.articleId = article._id;
+ const token = sessionStorage.getItem("token");
 
-    let res = await axios.put(
-      "https://atp-24eg105g20-2.onrender.com/user-api/articles",
-      commentObj,
-      { withCredentials: true }
-    );
+let res = await axios.put(
+  "https://atp-24eg105g20-2.onrender.com/user-api/articles",
+  commentObj,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     if (res.status === 200) {
       setArticle(res.data.payload);
@@ -143,7 +157,7 @@ function ArticleByID() {
         </h1>
 
         <div className={`${articleAuthorRow} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm`}>
-          <div className={authorInfo}>✍ {user.role}</div>
+          <div className={authorInfo}>✍ {user?.role}</div>
           <div>{formatDate(article.createdAt)}</div>
         </div>
       </div>
