@@ -49,7 +49,7 @@ function ArticleByID() {
 
       try {
         const res = await axios.get(
-          `https://atp-24eg105g20-2.onrender.com/user-api/article/${id}`,
+          `https://atp-24eg105g20-2.onrender.com/user-api/articles/${id}`,
           { withCredentials: true }
         );
 
