@@ -15,7 +15,7 @@ empApp.get('/emp',async(req,res)=>{
     const empList=await EmployeeModel.find();
     if(!empList)
         return res.status(404).json({message:"No"})
-    return res.status(200).json({message:"EMployees List",payload:empList});
+    return res.status(200).json({message:"Employees List",payload:empList});
 })
 
 empApp.put('/emp/:id',async(req,res)=>{
@@ -23,7 +23,7 @@ empApp.put('/emp/:id',async(req,res)=>{
     const eid = req.params.id;
     const emp=await EmployeeModel.findByIdAndUpdate(eid,{$set:{...updatedemp}},{returnDocument:"after"})
     if(emp!=null)
-        return res.status(200).json({message:"EMployee modified",payload:emp})
+        return res.status(200).json({message:"Employee modified",payload:emp})
     return res.status(404).json({message:"No employee found"})
 })
 
@@ -31,6 +31,6 @@ empApp.delete('/emp/:id',async(req,res)=>{
     const eid =req.params.id;
     const emp=await EmployeeModel.findByIdAndDelete(eid);
     if(emp!=null)
-        return res.status(200).json({message:"EMployee deleted",payload:emp})
+        return res.status(200).json({message:"Employee deleted",payload:emp})
     return res.status(404).json({message:"No employee found"})
 })
