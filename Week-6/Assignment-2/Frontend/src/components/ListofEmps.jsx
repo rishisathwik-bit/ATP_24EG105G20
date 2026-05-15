@@ -17,7 +17,7 @@ function ListOfEmps() {
   const deleteEmpById=async(id)=>{
      try {
     let res = await fetch(
-      `http://localhost:4000/emp-api/employees/${id}`,
+      `https://employee-reactapp.onrender.com/emp-api/employees/${id}`,
       {
         method: "DELETE", // ✅ VERY IMPORTANT
       }
