@@ -13,7 +13,7 @@ function CreateEmp() {
     try {
       setLoading(true);
 
-      let res = await fetch("https://employee-i0iq.onrender.com/emp-api/emp", {
+      let res = await fetch("https://employee-reactapp.onrender.com/emp-api/emp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEmpObj),
