@@ -26,7 +26,7 @@ useEffect(()=>{
   const saveModifiedEmp=async (modifiedEmp)=>{
     //console.log(modifiedEmp);
     //http put request
-    const res=await axios.put(`http://localhost:4000/emp-api/employees/${state._id}`,modifiedEmp);
+    const res=await axios.put(`https://employee-reactapp.onrender.com/emp-api/employees/${state._id}`,modifiedEmp);
     if(res.status===200){
       navigate("/list");
     }
