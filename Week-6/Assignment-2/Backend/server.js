@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 // import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
 const app = exp();
 
@@ -15,7 +15,7 @@ app.use('/emp-api', empApp);
 
 async function connectDB() {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect("mongodb+srv://rishi_sathwik:rishi2626@cluster0.o4pulwx.mongodb.net/BLOG-APP?retryWrites=true&w=majority");
 
     const PORT = 4000;
 
