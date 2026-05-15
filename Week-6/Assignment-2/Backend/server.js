@@ -2,7 +2,7 @@ import exp from 'express';
 import { empApp } from './APIs/EmployeeAPI.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ async function connectDB() {
   try {
     await mongoose.connect(process.env.MONGO_URI);
 
-    const PORT = process.env.PORT || 4000;
+    const PORT = 4000;
 
     app.listen(PORT, () => {
       console.log(`server started on port ${PORT}`);
