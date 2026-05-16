@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import { counterContextObj } from '../context/ContextProvider'
+import { counterContextObj } from '../context/contextProvider'
 import Test from './Test';
 import { useCounterStore } from '../store/CounterStore';
 
