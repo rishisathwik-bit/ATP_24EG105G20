@@ -1,7 +1,7 @@
 import { NavLink } from "react-router"
 function Header() {
   return (
-    <nav className="bg-green-300 flex justify-between items-center px-5 py-3">
+    <nav className="bg-orange-300 flex justify-between items-center px-5 py-3">
   
   <h1 className="text-3xl">LOGO</h1>
 
