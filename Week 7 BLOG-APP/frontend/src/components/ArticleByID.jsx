@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../store/authStore";
 import { useForm } from "react-hook-form";
+import BASE_URL from '../config';
 
 import {
   articlePageWrapper,
