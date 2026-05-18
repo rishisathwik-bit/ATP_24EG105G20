@@ -14,8 +14,8 @@ import UserList from './src/components/UserList'
 import AuthorList from './src/components/AuthorList'
 import EditArticle from './src/components/EditArticle'
 import { Toaster } from 'react-hot-toast'
-import Unauthorized from '../src/components/Unauthorized'
-import ProtectedRoute from '../src/components/ProtectedRoute'
+import Unauthorized from './src/components/Unauthorized'
+import ProtectedRoute from './src/components/ProtectedRoute'
 
 function App() {
   const routerObj = createBrowserRouter([
