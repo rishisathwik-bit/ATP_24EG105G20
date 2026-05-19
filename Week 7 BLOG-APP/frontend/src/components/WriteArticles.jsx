@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import {toast} from 'react-hot-toast'
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 import {
@@ -39,7 +39,7 @@ function WriteArticles() {
       setLoading(true);
       //make POST req to save new article
       let res = await axios.post(
-  "https://atp-24eg105g20-2.onrender.com/author-api/article",
+  "https://atp-24eg105g20-2.onrender.com/author-api/articles",
   articleObj,
   {
     withCredentials: true,
