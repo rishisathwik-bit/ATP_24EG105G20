@@ -82,18 +82,18 @@ commonApp.post('/login', async (req, res) => {
     }
 
     // TOKEN CREATION
-    const signedToken = sign(
-        {
-            id: user._id,
-            email: user.email,
-            role: user.role,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            profileImageUrl: user.profileImageUrl
-        },
-        process.env.KEY,
-        { expiresIn: "1h" }
-    )
+  const signedToken = sign(
+  {
+    id: user._id,
+    email: user.email,
+    role: user.role,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    profileImageUrl: user.profileImageUrl
+  },
+  process.env.SECRET_KEY,
+  { expiresIn: "1h" }
+)
 
     // set token to the cookie header 
     res.cookie("token", signedToken, {
