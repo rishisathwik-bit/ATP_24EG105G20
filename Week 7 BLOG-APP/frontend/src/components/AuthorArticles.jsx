@@ -50,7 +50,7 @@ function AuthorArticles() {
   }, [user, location.state?.refreshedAt])
 
   const openArticle = (article) => {
-    navigate(`/article/${article._id}`, {
+    navigate(`/articles/${article._id}`, {
       state: article
     })
   }
