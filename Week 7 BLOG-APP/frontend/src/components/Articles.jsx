@@ -51,7 +51,7 @@ function Articles() {
     })
 
   const openArticle = (article) => {
-    navigate(`/article/${article._id}`, { state: article })
+    navigate(`/articles/${article._id}`, { state: article })
   }
 
   if (loading) return <p className={loadingClass}>Loading articles...</p>
