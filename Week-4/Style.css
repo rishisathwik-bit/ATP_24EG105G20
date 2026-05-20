@@ -1,0 +1,36 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+nav{
+    display: flex;
+     margin-top: 40px;
+     justify-content: space-around;
+     background-color: rgb(186, 103, 20);
+}
+nav ul{
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+    margin-left: 80px;
+}
+main{ 
+    width: auto;
+    margin: auto;
+    text-align: center;
+    justify-content:space-around;
+}
+
+.cards{
+    margin: 20%;
+    width: auto;
+    display: flex;
+     gap: 20px;
+}
+section img,p{
+    display: flex ;
+    justify-content: center;
+    width: 350px;
+    background-color: brown;
+}

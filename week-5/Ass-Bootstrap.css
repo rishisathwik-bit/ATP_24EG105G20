@@ -1,0 +1,58 @@
+    
+.hello {
+  background-color: #e9ecef;
+  padding: 50px;
+ }
+
+  .hero h1 {
+   font-size: 40px;
+   margin-bottom: 10px;
+   }
+
+    .hero p {
+    color: #555;
+     max-width: 600px;
+  }
+
+ .btn {
+  display: inline-block;
+   margin-top: 15px;
+   padding: 10px 15px;
+   background-color: #007bff;
+   color: white;
+   border-radius: 4px;
+   gap: 20px;  
+}
+
+  .container {
+   display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    gap: 5px;   
+}
+
+  .box {
+    width: 30%;
+     background: white;
+     padding: 20px;
+     border-radius: 5px;
+    }
+ .box h2 {
+   margin-top: 0;
+  }
+
+  .btn-dark {
+   background-color: #6c757d;
+   padding: 8px 12px;
+    color: white;
+    border-radius: 4px;
+    display: inline-block;
+     margin-top: 10px;
+}
+
+ .footer {
+ text-align: center;
+ padding: 15px;
+ font-size: 14px;
+  color: gray;
+  }

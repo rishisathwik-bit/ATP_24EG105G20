@@ -1,0 +1,82 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #eaf3f3, #f6f1ec);
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px;
+    background: white;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px;
+}
+
+.card {
+    width: 260px;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.card1 { background: #d7ecec; }
+.card2 { background: #dbe6f3; }
+.card3 { background: #f2dcdc; }
+.card4 { background: #f3e2d6; }
+
+.profile {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 6px solid white;
+    margin-bottom: 15px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.travel {
+     background: #3aa6a6; 
+}
+.tech {
+     background: #4a90e2; 
+    }
+.fashion1 {
+     background: #d66a8c; 
+    }
+.fashion2 { 
+    background: #e08a5c;
+ }
+
+h3 {
+    margin: 10px 0;
+}
+
+p {
+    font-size: 14px;
+    color: #555;
+}
+
+.btn {
+    margin-top: 15px;
+    padding: 10px 22px;
+    border-radius: 25px;
+    color: white;
+     background: #d66a8c;
+    font-size: 14px;
+}
