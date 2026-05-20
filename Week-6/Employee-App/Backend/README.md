@@ -1,64 +1,62 @@
-# Blog App Backend
+# Employee App Backend
 
-Express + MongoDB backend for the Blog App. This service exposes role-based APIs for users, authors, and admins, and supports secure authentication, Cloudinary image uploads, and cookie-based JWT sessions.
+This directory contains the backend API server for the Employee App.
+It is built with Express, Mongoose, and CORS, and exposes CRUD endpoints for employee records.
 
-## Features
-- User registration and login
-- JWT authentication stored in secure cookies
-- Role-based access for `USER`, `AUTHOR`, and `ADMIN`
-- Cloudinary profile image uploads via `multer`
-- MongoDB data persistence with Mongoose
-- CORS configuration for frontend clients
+## Prerequisites
 
-## Tech Stack
-- Node.js (ES modules)
-- Express 5
-- MongoDB / Mongoose
-- bcryptjs
-- jsonwebtoken
-- multer
-- cloudinary
-- dotenv
+- Node.js 18+ installed
+- MongoDB connection string
 
 ## Setup
-1. Open a terminal and navigate to the backend folder:
-   ```bash
-   cd Backend
-   ```
+
+1. Open a terminal inside `Employee-App/Backend`.
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in `Backend` with:
-   ```env
-   PORT=5000
-   DB_URL=<mongodb-connection-string>
-   SECRET_KEY=<jwt-secret>
-   CLOUDINARY_CLOUD_NAME=<cloudinary-cloud-name>
-   CLOUDINARY_API_KEY=<cloudinary-api-key>
-   CLOUDINARY_API_SECRET=<cloudinary-api-secret>
-   ```
-4. Run the backend server:
-   ```bash
-   npm run dev
-   ```
-5. The server will start on the port defined in `PORT`.
+
+```bash
+npm install
+```
+
+3. Create a `.env` file or set the environment variables in your shell:
+
+```bash
+DB_URL="your-mongodb-connection-string"
+PORT=5000
+```
+
+4. Start the server:
+
+```bash
+node server.js
+```
+
+5. The server will listen on `http://localhost:5000` by default.
 
 ## API Endpoints
-- `POST /auth/users` — register a new user or author
-- `POST /auth/login` — login and receive cookie-based JWT
-- `GET /auth/logout` — clear auth cookie
-- `GET /auth/check-auth` — verify current user session
-- `PUT /auth/password` — change password
-- `USE /user-api` — user-specific routes
-- `USE /author-api` — author-specific routes
-- `USE /admin-api` — admin-specific routes
 
-## Environment Notes
-- CORS is configured to allow `http://localhost:5173`, `http://localhost:5174`, and Vercel app origins.
-- The backend uses `process.env.SECRET_KEY` to sign JWT tokens.
-- Cloudinary uploads require valid Cloudinary credentials.
+The backend exposes the following REST endpoints under `/emp-api`:
 
-## Run Scripts
-- `npm run dev` — run with `.env` variables
-- `npm start` — start the server with `node server.js`
+- `POST /emp-api/emp`
+  - Create a new employee
+  - Request body must be JSON
+- `GET /emp-api/emp`
+  - Fetch all employees
+- `PUT /emp-api/emp/:id`
+  - Update an existing employee by MongoDB `_id`
+- `DELETE /emp-api/emp/:id`
+  - Delete an employee by MongoDB `_id`
+
+## Employee Schema
+
+The employee model includes:
+
+- `name` (String, required)
+- `email` (String, required, unique)
+- `mobile` (Number, required)
+- `designation` (String, required)
+- `companyName` (String, required)
+
+## Notes
+
+- The backend uses `type: module` in `package.json`, so `node server.js` must be run in a Node version that supports ES modules.
+- To connect the frontend to this backend locally, update the API base URLs in the frontend components to `http://localhost:5000/emp-api/emp`.
