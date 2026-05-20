@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import axios from "axios";
-import BASE_URL from "../config";
 
 export const useAuth = create((set) => ({
   currentUser: null,
@@ -13,7 +12,7 @@ export const useAuth = create((set) => ({
       //set loading true
       set({ loading: true, currentUser: null, isAuthenticated: false, error: null });
       //make api call
-      let res = await axios.post(`${BASE_URL}/auth/login`, userCred, { withCredentials: true });
+      let res = await axios.post("https://atp-24eg105g20-2.onrender.com/auth/login", userCred, { withCredentials: true });
       //update state
       if (res.status === 200) {
         set({
@@ -30,7 +29,7 @@ export const useAuth = create((set) => ({
         isAuthenticated: false,
         currentUser: null,
         //error: err,
-        error: err.response?.data?.message || err.response?.data?.error || "Login failed",
+        error: err.response?.data?.error || "Login failed",
       });
     }
   },
@@ -38,7 +37,7 @@ export const useAuth = create((set) => ({
     try {
       //set loading state
       //make logout api req
-      let res = await axios.get(`${BASE_URL}/auth/logout`, { withCredentials: true });
+      let res = await axios.get("https://atp-24eg105g20-2.onrender.com/auth/logout", { withCredentials: true });
       //update state
       if (res.status === 200) {
         set({
@@ -53,7 +52,7 @@ export const useAuth = create((set) => ({
         loading: false,
         isAuthenticated: false,
         currentUser: null,
-        error: err.response?.data?.message || err.response?.data?.error || "Logout failed",
+        error: err.response?.data?.error || "Logout failed",
       });
     }
   },
@@ -61,7 +60,7 @@ export const useAuth = create((set) => ({
   checkAuth: async () => {
     try {
       set({ loading: true });
-      const res = await axios.get(`${BASE_URL}/auth/check-auth`, { withCredentials: true });
+      const res = await axios.get("https://atp-24eg105g20-2.onrender.com/auth/check-auth", { withCredentials: true });
 
       set({
         currentUser: res.data.payload,

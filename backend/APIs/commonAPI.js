@@ -3,6 +3,7 @@ import exp from 'express'
 import {UserModel} from '../models/UserModel.js'
 import {hash,compare} from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { userApp } from './UserAPI.js'
 import { verifyToken } from '../middlewares/verifyToken.js'
 
 export const commonApp = exp.Router()
@@ -11,17 +12,6 @@ import {uploadToCloudinary} from '../config/cloudinaryUpload.js'
 import cloudinary from '../config/cloudinary.js'
 
 const {sign}=jwt
-
-const getCookieOptions = (req) => {
-    const origin = req.get("origin") || "";
-    const isLocalRequest = origin.startsWith("http://localhost") || origin.startsWith("http://127.0.0.1");
-
-    return {
-        httpOnly: true,
-        sameSite: isLocalRequest ? "lax" : "none",
-        secure: !isLocalRequest,
-    }
-}
 
 // Route to register
 commonApp.post('/users', upload.single("profileImageUrl"), async (req, res, next) => {
@@ -39,7 +29,7 @@ commonApp.post('/users', upload.single("profileImageUrl"), async (req, res, next
         /// upload image to cloudinary from memoryStorage
         if (req.file) {
     try {
-        cloudinaryResult = await uploadToCloudinary(req.file.buffer);
+        const cloudinaryResult = await uploadToCloudinary(req.file.buffer);
         newUser.profileImageUrl = cloudinaryResult?.secure_url;
     } catch (err) {
         newUser.profileImageUrl = "";
@@ -47,6 +37,9 @@ commonApp.post('/users', upload.single("profileImageUrl"), async (req, res, next
 } else {
     newUser.profileImageUrl = "";
 }
+
+        // add CDN link of image to new userObj
+        newUser.profileImageUrl = cloudinaryResult?.secure_url;
 
         // RUN VALIDATORS MANUALLY
 
@@ -103,7 +96,11 @@ commonApp.post('/login', async (req, res) => {
 )
 
     // set token to the cookie header 
-    res.cookie("token", signedToken, getCookieOptions(req))
+    res.cookie("token", signedToken, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true
+    })
 
     // remove the password field from the user obj
     const userObj = user.toObject();
@@ -115,7 +112,11 @@ commonApp.post('/login', async (req, res) => {
 // route for logout
 commonApp.get('/logout', (req, res) => {
     // delete the teoken from the cookie storage
-    res.clearCookie("token", getCookieOptions(req))
+    res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true
+    })
     res.status(200).json({ message: "Logged out successfully" });
 })
 

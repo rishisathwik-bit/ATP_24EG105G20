@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../store/authStore'
 import BASE_URL from '../config'
 import {
@@ -50,7 +50,7 @@ function AuthorArticles() {
   }, [user, location.state?.refreshedAt])
 
   const openArticle = (article) => {
-    navigate(`/article/${article._id}`, {
+    navigate(`/articles/${article._id}`, {
       state: article
     })
   }
@@ -76,10 +76,10 @@ function AuthorArticles() {
           {/* Status Badge */}
           <span
             className={
-              article.isArticleActive ? articleStatusActive : articleStatusDeleted
+              article.isActive ? articleStatusActive : articleStatusDeleted
             }
           >
-            {article.isArticleActive ? 'ACTIVE' : 'DELETED'}
+            {article.isActive ? 'ACTIVE' : 'DELETED'}
           </span>
 
           <div className="flex flex-col gap-2 min-w-0">

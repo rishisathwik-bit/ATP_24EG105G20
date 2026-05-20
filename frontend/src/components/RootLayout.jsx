@@ -13,7 +13,7 @@ function RootLayout() {
 
   useEffect(()=>{
     checkAuth()
-  },[checkAuth])
+  },[])
 
 
   return (

@@ -8,22 +8,11 @@ export const adminApp = exp.Router()
 // ROUTE TO READ ALL users
 
 adminApp.get('/users',verifyToken("ADMIN"),async(req,res)=>{
-    const usersList = await UserModel.find({ role: "USER" }).select("-password");
+    const usersList = await UserModel.find({});
     if(!usersList){
         return res.status(404).json({message:"Users not found"});
     }
     res.status(200).json({message:"All users",payload:usersList})
-})
-
-adminApp.get('/authors',verifyToken("ADMIN"),async(req,res)=>{
-    const authorsList = await UserModel.find({ role: "AUTHOR" }).select("-password");
-    res.status(200).json({message:"All authors",payload:authorsList})
-})
-
-adminApp.get('/articles',verifyToken("ADMIN"),async(req,res)=>{
-    const articlesList = await ArticleModel.find({})
-        .populate("author", "firstName lastName email");
-    res.status(200).json({message:"All articles",payload:articlesList})
 })
 
 // Bloack or activate the users
@@ -31,18 +20,13 @@ adminApp.get('/articles',verifyToken("ADMIN"),async(req,res)=>{
 adminApp.patch('/users',verifyToken("ADMIN"),async(req,res)=>{
     // get the body from req
     let {userId,isUserActive} =  req.body;
-    if(!userId || typeof isUserActive !== "boolean"){
-        return res.status(400).json({message:"User ID and active status are required"});
-    }
     // check for user present in db
     const user = await UserModel.findById(userId);
     if(!user){
-        return res.status(404).json({message:"User/Author not found"});
+        return res.json({message:"USer/Author not found"});
     }
     user.isUserActive = isUserActive;
     await user.save();
-    res.status(200).json({
-        message: isUserActive ? "Activated the user" : "Blocked the user",
-        payload: user
-    });
+    if(!isUserActive)return res.json({message:"Blocked the user"})
+        res.status(200).json({message:"Activated the user"});
 })

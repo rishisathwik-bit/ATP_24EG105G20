@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../store/authStore";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import BASE_URL from '../config';
 
 import {
@@ -44,9 +43,10 @@ function ArticleByID() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (article) return;
+
     const getArticle = async () => {
       setLoading(true);
-      setError(null);
 
       try {
         const res = await axios.get(
@@ -56,7 +56,7 @@ function ArticleByID() {
 
         setArticle(res.data.payload);
       } catch (err) {
-        setError(err.response?.data?.message || err.response?.data?.error || "Failed to load article");
+        setError(err.response?.data?.error);
       } finally {
         setLoading(false);
       }
@@ -92,13 +92,13 @@ function ArticleByID() {
         { withCredentials: true }
       );
 
-      setArticle(res.data.payload || { ...article, isArticleActive: newStatus });
+      setArticle(res.data.payload);
       navigate("/author-profile");
     } catch (err) {
-      const msg = err.response?.data?.message || err.response?.data?.error;
+      const msg = err.response?.data?.message;
 
       if (err.response?.status === 400) {
-        toast.error(msg);
+        toast(msg);
       } else {
         setError(msg || "Operation failed");
       }
@@ -112,18 +112,14 @@ function ArticleByID() {
   const addComment = async (commentObj) => {
     commentObj.articleId = article._id;
 
-    try {
-      const res = await axios.put(
-        `${BASE_URL}/user-api/articles`,
-        commentObj,
-        { withCredentials: true }
-      );
+    let res = await axios.put(
+      `${BASE_URL}/user-api/articles`,
+      commentObj,
+      { withCredentials: true }
+    );
 
-      if (res.status === 200) {
-        setArticle(res.data.payload);
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to add comment");
+    if (res.status === 200) {
+      setArticle(res.data.payload);
     }
   };
 
@@ -148,7 +144,7 @@ function ArticleByID() {
         </h1>
 
         <div className={`${articleAuthorRow} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm`}>
-          <div className={authorInfo}>{article.author?.firstName || user?.firstName || "Author"}</div>
+          <div className={authorInfo}>✍ {user.role}</div>
           <div>{formatDate(article.createdAt)}</div>
         </div>
       </div>
@@ -181,7 +177,7 @@ function ArticleByID() {
 
             <input
               type="text"
-              {...register("comment", { required: true })}
+              {...register("comment")}
               className={`${inputClass} text-sm sm:text-base`}
               placeholder="Write your comment here..."
             />
@@ -201,13 +197,13 @@ function ArticleByID() {
       {/* comments */}
       <div className={`${commentsWrapper} mt-6 sm:mt-8`}>
 
-        {(!article.comments || article.comments.length === 0) && (
+        {(!article.comment || article.comment.length === 0) && (
           <p className="text-[#a1a1a6] text-sm text-center">
             No comments yet
           </p>
         )}
 
-        {article.comments?.map((commentObj, index) => {
+        {article.comment?.map((commentObj, index) => {
           const name = commentObj.user?.email || "User";
           const firstLetter = name.charAt(0).toUpperCase();
 

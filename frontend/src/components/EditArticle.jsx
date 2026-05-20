@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
 import BASE_URL from "../config"
 import {
   formCard,
@@ -12,11 +11,13 @@ import {
   inputClass,
   submitBtn,
   errorClass,
+  articlePageWrapper,
 } from "../styles/common";
 
 function EditArticle() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const article = location.state;
 
@@ -37,25 +38,14 @@ function EditArticle() {
   }, [article, setValue]);
 
   const updateArticle = async (modifedArticle) => {
-    if (!article?._id) {
-      toast.error("Article data is missing. Please open the article again.");
-      navigate("/author-profile");
-      return;
-    }
-
     modifedArticle.articleId = article._id;
-    try {
-      const res = await axios.put(
-        `${BASE_URL}/author-api/articles`,
-        modifedArticle,
-        { withCredentials: true },
-      );
-      if (res.status === 200) {
-        toast.success("Article updated successfully");
-        navigate(`/article/${article._id}`, { state: res.data.payload });
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to update article");
+    const res = await axios.put(
+      `${BASE_URL}/author-api/articles`,
+      modifedArticle,
+      { withCredentials: true },
+    );
+    if (res.status === 200) {
+      navigate(`/article/${article._id}`, { state: res.data.payload });
     }
   };
 

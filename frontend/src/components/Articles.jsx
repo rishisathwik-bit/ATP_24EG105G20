@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../store/authStore'
 import BASE_URL from '../config'
 import {
@@ -51,7 +51,7 @@ function Articles() {
     })
 
   const openArticle = (article) => {
-    navigate(`/article/${article._id}`, { state: article })
+    navigate(`/articles/${article._id}`, { state: article })
   }
 
   if (loading) return <p className={loadingClass}>Loading articles...</p>

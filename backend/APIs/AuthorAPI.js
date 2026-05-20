@@ -37,7 +37,7 @@ authorApp.get('/articles', verifyToken("AUTHOR"), async (req, res) => {
     try {
         const { id } = req.user
 
-        const articlesList = await ArticleModel.find({ author: id }).populate("author", "firstName lastName email")
+        const articlesList = await ArticleModel.find({ author: id })
 
         res.status(200).json({
             message: "Your articles",
@@ -123,8 +123,7 @@ authorApp.patch('/articles', verifyToken("AUTHOR"), async (req, res) => {
         res.status(200).json({
             message: isArticleActive
                 ? "Article recovered"
-                : "Article deleted",
-            payload: article
+                : "Article deleted"
         })
 
     } catch (err) {

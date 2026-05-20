@@ -10,8 +10,6 @@ import AuthorArticles from "./components/AuthorArticles";
 import EditArticle from './components/EditArticle'
 import WriteArticles from "./components/WriteArticles";
 import AdminProfile from './components/AdminProfile'
-import AdminUsers from './components/AdminUsers'
-import AdminArticles from './components/AdminArticles'
 import Unauthorized from "./components/Unauthorized";
 
 import {Toaster} from 'react-hot-toast'
@@ -73,24 +71,6 @@ function App() {
         {
           path:"admin-profile",
           element: <ProtectedRoute allowedRoles={["ADMIN"]}><AdminProfile/></ProtectedRoute>,
-          children: [
-            {
-              index: true,
-              element: <AdminUsers />,
-            },
-            {
-              path: "users",
-              element: <AdminUsers />,
-            },
-            {
-              path: "authors",
-              element: <AdminUsers role="AUTHOR" />,
-            },
-            {
-              path: "articles",
-              element: <AdminArticles />,
-            },
-          ],
         },
         {
           path:"unauthorized",

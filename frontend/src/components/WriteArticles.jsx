@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import {toast} from 'react-hot-toast'
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import BASE_URL from "../config";
 axios.defaults.withCredentials = true;
 import {
   formCard,
@@ -15,10 +14,12 @@ import {
   errorClass,
   loadingClass,
 } from "../styles/common";
+import { useAuth } from "../store/authStore";
 
 function WriteArticles() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const currentUser = useAuth((state) => state.currentUser);
 
   const {
     register,
@@ -31,24 +32,27 @@ function WriteArticles() {
   const submitArticle = async (articleObj) => {
     setLoading(true);
 
+    //add authorId to articleObj
+    articleObj.author = currentUser._id;
     try {
+      //set loading true
+      setLoading(true);
       //make POST req to save new article
       let res = await axios.post(
-        `${BASE_URL}/author-api/articles`,
-        articleObj,
-        {
-          withCredentials: true,
-        }
-      )
+  "https://atp-24eg105g20-2.onrender.com/author-api/articles",
+  articleObj,
+  {
+    withCredentials: true,
+  }
+)
       //navigate to AuthorArticles
       if (res.status === 201) {
         toast.success("Article published successfully")
-        reset();
         navigate("../articles");
         // navigate("./author-profile/articles");
       }
     } catch (err) {
-       toast.error(err.response?.data?.message || err.response?.data?.error || "Failed to publish article");
+       toast.error(err.response?.data?.error || "Failed to publish article");
     } finally {
       setLoading(false);
     }

@@ -14,7 +14,6 @@ import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from 'axios';
-import BASE_URL from "../config";
 function Register() {
   const {
     register,
@@ -23,30 +22,21 @@ function Register() {
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
-  const navigate = useNavigate();
+const Navigate = useNavigate();
   //When user registration submitted
   const onUserRegister = async (userObj) => {
     console.log(userObj);
     try {
         //start loading
         setLoading(true);
-        const formData = new FormData();
-        Object.entries(userObj).forEach(([key, value]) => {
-          if (key === "profileImageUrl") {
-            if (value?.[0]) formData.append(key, value[0]);
-            return;
-          }
-          formData.append(key, value);
-        });
-
         //make HTTP POST req to create User in Backend
-        let res=await axios.post(`${BASE_URL}/auth/users`,formData)
-        if(res.status===201)
+        let res=await axios.post("https://atp-24eg105g20-2.onrender.com/auth/users",userObj)
+        if(res.status==201)
         // Navigate to Login
-       navigate("/login");
+       Navigate("/login");
     } catch (err) {
       console.log("err in registration", err);
-      setApiError(err.response?.data?.message || err.response?.data?.error || "Registration failed");
+      setApiError(err.response?.data?.error || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -146,6 +136,7 @@ function Register() {
               placeholder="you@example.com"
               {...register("email", {
                 required: "Email is required",
+                required: [true, "Password is required"],
               })}
             />
             {errors.email && <p className={errorClass}>{errors.email.message}</p>}
@@ -179,8 +170,8 @@ function Register() {
           </div>
 
           {/* SUBMIT */}
-          <button type="submit" className={submitBtn} disabled={loading}>
-            {loading ? "Creating..." : "Create Account"}
+          <button type="submit" className={submitBtn}>
+            Create Account
           </button>
         </form>
 

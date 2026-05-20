@@ -12,7 +12,7 @@ import {
   linkClass,
   loadingClass,
 } from "../styles/common";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate, useLocation } from "react-router";
 import { useAuth } from "../store/authStore";
 import { useEffect } from "react";
 import {toast} from 'react-hot-toast'
@@ -35,7 +35,7 @@ function Login() {
 
   useEffect(() => {
     //navigation logic
-    if (isAuthenticated === true && currentUser?.role) {
+    if (isAuthenticated === true) {
       if (currentUser.role === "USER") {
         //show cuccess toast
         toast.success("Login success and redirecting to User Profile",{duration:2000})
@@ -50,7 +50,7 @@ function Login() {
         navigate("/admin-profile");
       }
     }
-  }, [currentUser?.role, isAuthenticated, navigate]);
+  }, [isAuthenticated]);
 
   //deal with loading
   if (loading) {
